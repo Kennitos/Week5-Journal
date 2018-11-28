@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -17,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:clickable="true"
-        app:backgroundTint="@android:color/holo_green_light"
-        app:srcCompat="@android:drawable/ic_input_add"
+        android:focusable="true"
         android:onClick="goToSecond"
-        android:focusable="true" />
+        app:backgroundTint="@android:color/holo_green_light"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </android.support.design.widget.CoordinatorLayout>
