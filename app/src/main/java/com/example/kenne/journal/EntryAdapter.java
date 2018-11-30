@@ -3,6 +3,7 @@ package com.example.kenne.journal;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
@@ -21,12 +22,30 @@ public class EntryAdapter extends ResourceCursorAdapter {
         TextView titleview = view.findViewById(R.id.titleView);
         TextView dateview = view.findViewById(R.id.dateView);
         TextView moodview = view.findViewById(R.id.moodView);
+        ImageView imageview = view.findViewById(R.id.imageView);
 
         titleview.setText(title);
         dateview.setText(date);
         moodview.setText(mood);
 
+        if(mood!=null){
+            switch (mood) {
+                case "happy":
+                    imageview.setImageResource(R.drawable.happy);
+                    break;
+                case "sleepy":
+                    imageview.setImageResource(R.drawable.sleeping);
+                    break;
+                case "sick":
+                    imageview.setImageResource(R.drawable.sick);
+                    break;
+                case "angry":
+                    imageview.setImageResource(R.drawable.angry);
+                    break;
+                case "stoically":
+                    imageview.setImageResource(R.drawable.stoically);
+                    break;
+            }
+        }
     }
-
-
 }

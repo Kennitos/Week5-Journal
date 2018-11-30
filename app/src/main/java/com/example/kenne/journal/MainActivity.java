@@ -10,6 +10,8 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.sql.Timestamp;
+
 public class MainActivity extends AppCompatActivity {
 
     private EntryDatabase db;
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listview);
         listView.setAdapter(adapter);
-        listView.setOnItemLongClickListener(new ThisIsAnInnerClass());
+        listView.setOnItemLongClickListener(new InnerClassLongClick());
+        listView.setOnItemClickListener(new InnerClassClick());
 
     }
 
@@ -35,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SecondActivity.class);
         startActivity(intent);
     }
-    private class ThisIsAnInnerClass implements AdapterView.OnItemLongClickListener{
+
+    private class InnerClassLongClick implements AdapterView.OnItemLongClickListener{
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
             Cursor clickedEntry = (Cursor) adapterView.getItemAtPosition(i);
             Integer id = clickedEntry.getInt(clickedEntry.getColumnIndex("_id"));
+
             Log.d("longpress","id: "+id);
             EntryDatabase db = EntryDatabase.getInstance(getApplicationContext());
             db.delete(id);
@@ -47,6 +52,25 @@ public class MainActivity extends AppCompatActivity {
             updateData();
 
             return true;
+        }
+    }
+
+    private class InnerClassClick implements AdapterView.OnItemClickListener{
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Cursor clickedEntry = (Cursor) adapterView.getItemAtPosition(i);
+
+            String title = clickedEntry.getString(clickedEntry.getColumnIndex("title"));
+            String content = clickedEntry.getString(clickedEntry.getColumnIndex("content"));
+            String mood = clickedEntry.getString(clickedEntry.getColumnIndex("mood"));
+            String date = clickedEntry.getString(clickedEntry.getColumnIndex("date"));
+
+            Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+            intent.putExtra("title",title);
+            intent.putExtra("content",content);
+            intent.putExtra("mood",mood);
+            intent.putExtra("date",date);
+            startActivity(intent);
         }
     }
 

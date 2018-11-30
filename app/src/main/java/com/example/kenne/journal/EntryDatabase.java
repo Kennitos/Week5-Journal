@@ -47,7 +47,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
     public void insert(JournalEntry entry){
         getWritableDatabase();
-        String title = entry.getTitle().toString();
+        String title = entry.getTitle();
         String content = entry.getContent();
         String mood = entry.getMood();
 
