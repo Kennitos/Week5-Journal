@@ -1,8 +1,10 @@
 package com.example.kenne.journal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,15 +16,24 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
     }
 
-    public void goToThird (View view ){
+    public void addEntry (View view ){
         EditText edittitle = findViewById(R.id.editTitle);
-        String title = edittitle.toString();
+        String title = edittitle.getText().toString();
         EditText editcontent = findViewById(R.id.editContent);
-        String content = editcontent.toString();
+        String content = editcontent.getText().toString();
 
-        Intent intent = new Intent(this, ThirdActivity.class);
-        intent.putExtra("title",title);
-        intent.putExtra("content",content);
+        JournalEntry entry = new JournalEntry(0,title,content,null,"happy");
+        EntryDatabase db = EntryDatabase.getInstance(getApplicationContext());
+        db.insert(entry);
+
+        Log.d("newentry","secondactivty "+title+content);
+
+
+
+
+        Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra("title",title);
+//        intent.putExtra("content",content);
         startActivity(intent);
     }
 }

@@ -32,12 +32,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!--android:onClick=""/>-->
+
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_dialog" />
+            app:srcCompat="@android:drawable/btn_dialog"
+/>
 
         <ImageButton
             android:id="@+id/imageButton2"

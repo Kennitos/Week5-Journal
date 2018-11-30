@@ -1,10 +1,14 @@
 package com.example.kenne.journal;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import java.sql.Timestamp;
 
 public class EntryDatabase extends SQLiteOpenHelper {
     @Override
@@ -42,8 +46,19 @@ public class EntryDatabase extends SQLiteOpenHelper {
     }
 
     public void insert(JournalEntry entry){
+        getWritableDatabase();
+        String title = entry.getTitle().toString();
+        String content = entry.getContent();
+        String mood = entry.getMood();
 
+        ContentValues values = new ContentValues();
+        values.put("title",title);
+        values.put("content",content);
+        values.put("mood",mood);
 
+        Log.d("newentry","entrydatabase "+title+content+mood);
+
+        getWritableDatabase().insert("entries","title",values);
     }
 
 
